@@ -1,9 +1,10 @@
-import { getToken } from "../services/SpotifyApiToken";
-import { useEffect } from "react";
+import { getAuthToken } from "../services/SpotifyAuthToken";
+import { useEffect, useState } from "react";
 
 const Home = () => {
+    const [authToken, setAuthToken] = useState("");
     useEffect(() => {
-        getToken();
+        setAuthToken(getAuthToken());
     }, [])
 
     return <>
