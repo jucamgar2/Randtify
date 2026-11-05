@@ -23,11 +23,21 @@ const base64encode = (input) => {
 export const getAuthToken = async () => {
     const accessToken = localStorage.getItem('access_token');
     const accessTokenIssuedAt = localStorage.getItem('issued_at');
+    const refreshTokenIssuedAt = localStorage.getItem('refresh_start');
     const elapsedHours = (new Date().getTime() - new Date(accessTokenIssuedAt).getTime()) / (1000 * 60 * 60);
-    if(!accessToken || elapsedHours >= 1){
+    const elapsedRefreshToken = (new Date().getTime() - new Date(refreshTokenIssuedAt).getTime()) / (1000 * 60 * 60)
+    if(!accessToken ) {
+        findAuthToken();
+    }else if(elapsedHours >= 1) {
+        findRefreshToken();
+    }else if(elapsedRefreshToken >= 180) {
         findAuthToken();
     }
     return accessToken;
+}
+
+const findRefreshToken = async () => {
+    
 }
 
 const findAuthToken = async () => {
@@ -78,6 +88,7 @@ export const getToken = async (code) => {
     localStorage.setItem("access_token", data.access_token);
     localStorage.setItem("refresh_token", data.refresh_token);
     localStorage.setItem("issued_at", new Date());
+    localStorage.setItem("refresh_start", new Date());
     localStorage.removeItem("code_verifier");
     localStorage.removeItem("spotify_state");
     return data;
