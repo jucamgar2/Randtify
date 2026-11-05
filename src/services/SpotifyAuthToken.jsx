@@ -22,10 +22,10 @@ const base64encode = (input) => {
 
 export const getAuthToken = async () => {
     const accessToken = localStorage.getItem('access_token');
-    const accessTokenIssuedAt = localStorage.getItem('issued_at');
-    const refreshTokenIssuedAt = localStorage.getItem('refresh_start');
+    const accessTokenIssuedAt = localStorage.getItem('issued_at') ? localStorage.getItem('issued_at') : new Date();
+    const refreshTokenIssuedAt = localStorage.getItem('refresh_start') ? localStorage.getItem('refresh_start') : new Date();
     const elapsedHours = (new Date().getTime() - new Date(accessTokenIssuedAt).getTime()) / (1000 * 60 * 60);
-    const elapsedRefreshToken = (new Date().getTime() - new Date(refreshTokenIssuedAt).getTime()) / (1000 * 60 * 60)
+    const elapsedRefreshToken = (new Date().getTime() - new Date(refreshTokenIssuedAt).getTime()) / (1000 * 60 * 60 * 24);
     if(!accessToken ) {
         findAuthToken();
     }else if(elapsedHours >= 1) {
@@ -37,7 +37,28 @@ export const getAuthToken = async () => {
 }
 
 const findRefreshToken = async () => {
-    
+    const refresh = localStorage.getItem("refresh_token");
+    const response = await fetch(
+        "https://accounts.spotify.com/api/token",
+        {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({
+                grant_type: 'refresh_token',
+                refresh_token: refresh,
+                client_id: CLIENT_ID
+            }),
+        }
+        
+    );
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.error_description || "Spotify authentication failed");
+    }
+    localStorage.setItem("access_token", data.access_token);
+    localStorage.setItem("issued_at", new Date());
 }
 
 const findAuthToken = async () => {
@@ -81,7 +102,6 @@ export const getToken = async (code) => {
         }
     );
     const data = await response.json();
-    console.log(data);
     if (!response.ok) {
         throw new Error(data.error_description || "Spotify authentication failed");
     }
