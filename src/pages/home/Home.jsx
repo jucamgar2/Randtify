@@ -1,4 +1,4 @@
-import { getAuthToken } from "../services/SpotifyAuthToken";
+import { getAuthToken } from "../../services/SpotifyAuthToken";
 import { useEffect, useState } from "react";
 
 const Home = () => {
@@ -7,9 +7,9 @@ const Home = () => {
         setAuthToken(getAuthToken());
     }, [])
 
-    return <>
+    return <div>
         <h1>Holaaa</h1>
-    </>
+    </div>
 }
 
 export default Home;

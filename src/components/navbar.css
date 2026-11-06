@@ -1,0 +1,11 @@
+.nav-bar {
+    position: fixed;
+    left: 0px;
+    width: 3%;
+    background-color: var(--color-third);
+    height: 100%;
+}
+
+.nav-bar .icon {
+    width: 12px;
+}
