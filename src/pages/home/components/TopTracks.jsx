@@ -6,7 +6,7 @@ const TopTracks = () => {
     const authToken = localStorage.getItem("access_token");
 
     useEffect(() => {
-        const getTopArtistsInfo = async () => {
+        const getTopTracksInfo = async () => {
             const response = await fetch(
                 "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=5",
                 {
@@ -20,7 +20,7 @@ const TopTracks = () => {
             const data = await response.json();
             setTopTracks(data);
         }
-        if(authToken) getTopArtistsInfo();
+        if(authToken) getTopTracksInfo();
     }, [authToken])
 
     return (
@@ -29,9 +29,10 @@ const TopTracks = () => {
                 {topTracks && topTracks.items.map((topTrack) => (
                     <div className='top-item'>
                         <img src={topTrack.album.images[0].url} alt={topTrack.name}/>
-                        <p>{topTrack.name}</p>
+                        <p>
+                            {topTrack.name} - {topTrack.artists.map(artist => artist.name).join(", ")}
+                        </p>
                     </div>
-                    
                 ))}
             </div>
         </div>

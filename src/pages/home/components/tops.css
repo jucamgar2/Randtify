@@ -1,6 +1,6 @@
 .top-container {
     border-radius: 20px;
-    width: 30vw;
+    width: 27vw;
     background-color: var(--color-secondary);
 }
 
@@ -11,21 +11,31 @@
 .top-items {
     display: flex;
     flex-direction: column;
-    gap: 5px;
     padding: 3%;
 }
 
 .top-item {
     display: flex;
-    gap: 16px;
+    align-items: flex-start;
+    padding-top: 10px;
+    padding-bottom: 10px;
     color: var(--color-primary);
     font-weight: bold;
-    font-size: 1.25em;
+    font-size: 1.15em;
+    max-height: 65px;
+}
 
+.top-item p {
+    margin-top: 0;
+}
+
+.top-item:not(:first-child) {
+    border-top: 1px solid var(--color-primary);
 }
 
 .top-item img{
-    width: 75px;
-    height: 75px;
+    width: 65px;
+    height: 65px;
     border-radius: 5px;
+    padding-right: 16px;
 }

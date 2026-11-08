@@ -29,7 +29,7 @@ export const getAuthToken = async () => {
     if(!accessToken ) {
         findAuthToken();
     }else if(elapsedHours >= 1) {
-        findRefreshToken();
+        return findRefreshToken();
     }else if(elapsedRefreshToken >= 180) {
         findAuthToken();
     }
@@ -59,6 +59,7 @@ const findRefreshToken = async () => {
     }
     localStorage.setItem("access_token", data.access_token);
     localStorage.setItem("issued_at", new Date());
+    return data.access_token;
 }
 
 const findAuthToken = async () => {
