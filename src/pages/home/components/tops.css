@@ -39,3 +39,9 @@
     border-radius: 5px;
     padding-right: 16px;
 }
+
+@media screen and (max-width: 600px) {
+    .top-container {
+        width: 90vw;
+    }
+}
