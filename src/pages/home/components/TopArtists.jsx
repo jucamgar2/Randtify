@@ -19,7 +19,6 @@ const TopArtists = () => {
                 }
             );
             const data = await response.json();
-            console.log(data);
             setTopArtists(data);
         }
         if(authToken) getTopArtistsInfo();

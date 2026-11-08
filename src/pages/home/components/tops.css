@@ -1,9 +1,11 @@
 .top-container {
-    
-    border: 1px solid var(--color-secondary);
     border-radius: 20px;
     width: 30vw;
     background-color: var(--color-secondary);
+}
+
+.secondary {
+    background-color: var(--color-fourth);
 }
 
 .top-items {
@@ -19,7 +21,7 @@
     color: var(--color-primary);
     font-weight: bold;
     font-size: 1.25em;
-    
+
 }
 
 .top-item img{
