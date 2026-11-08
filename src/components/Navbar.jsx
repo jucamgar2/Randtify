@@ -22,7 +22,6 @@ const Navbar = () => {
                 }
             );
             const data = await response.json();
-            console.log(data);
             setUserName(data.display_name);
             setUserImage(data.images[0].url);
             setSpotifyUrl(data.external_urls.spotify);

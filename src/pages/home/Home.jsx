@@ -1,5 +1,8 @@
 import { getAuthToken } from "../../services/SpotifyAuthToken";
 import { useEffect, useState } from "react";
+import TopArtists from "./components/TopArtists";
+import TopTracks from "./components/TopTracks";
+import './home.css';
 
 const Home = () => {
     const [authToken, setAuthToken] = useState("");
@@ -8,7 +11,22 @@ const Home = () => {
     }, [])
 
     return <div>
-        <h1>Holaaa</h1>
+        <h1>Randtify</h1>
+        <div>
+            <div className="home-content">
+                <div>
+                    <h2>Tus artistas del mes</h2>
+                    <TopArtists />
+                </div>
+                <div>
+                    <h2>Tus canciones del mes</h2>
+                    <TopTracks />
+                </div>
+                
+            </div>
+            
+        </div>
+       
     </div>
 }
 
