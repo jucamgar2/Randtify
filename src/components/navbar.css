@@ -9,9 +9,57 @@
     justify-content: center;
     align-items: center;
     gap: 10%;
+    transition: width 0.25s linear;
 }
 
 .nav-bar .icon {
     margin-top: 15%;
     width: 25px;
+}
+
+.nav-bar:hover {
+    width: 10%;
+    gap: 5%;
+    transition: width 0.25s linear;
+}
+
+.icon-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.nav-bar p {
+    display: none;
+    transition: display 0.5s ease-out;
+}
+
+.nav-bar:hover p{
+    display: inline;
+    transition: display 0.5s ease-in;
+}
+
+@media screen and (max-width: 600px) {
+    .nav-bar {
+        position: fixed;
+        left: 5%;
+        bottom: 1%;
+        width: 90%;
+        height: 6%;
+        display: flex;
+        flex-direction: row;
+        border-radius: 20px;
+    }
+    
+    .nav-bar:hover p{
+        display: none;
+    }
+
+    .nav-bar:hover {
+        width: 90%;
+        gap: 10%;
+    }
+
 }
