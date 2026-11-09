@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import TopArtists from "./components/TopArtists";
 import TopTracks from "./components/TopTracks";
 import './home.css';
+import Recommendations from "./components/Recommendations";
 
 const Home = () => {
     const [authToken, setAuthToken] = useState("");
@@ -21,6 +22,10 @@ const Home = () => {
                 <div>
                     <h2>Tus canciones del mes</h2>
                     <TopTracks />
+                </div>
+                <div>
+                    <h2>Recomendaciones</h2>
+                    <Recommendations />
                 </div>
                 
             </div>
