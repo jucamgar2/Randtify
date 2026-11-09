@@ -7,9 +7,10 @@ const Recommendations = () => {
 
     useEffect(() => {
         const getRecommendations = async () => {
-            
-            const response = await fetch(
-                "https://api.spotify.com/v1/recommendations?limit=5",
+            let recommendationsRetrieved = [];
+            const randomTopArtistIndex = Math.floor(Math.random()*50);
+            const topArtist = await fetch(
+                `https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=1&offset=${randomTopArtistIndex}`,
                 {
                     method: "GET",
                     headers: {
@@ -18,16 +19,51 @@ const Recommendations = () => {
                     }
                 }
             );
-            const data = await response.json();
-            setRecommendations(data);
+            const artist = await topArtist.json();
+            console.log(artist);
+            const artistId = artist.items[0].id;
+            const albumsOfArtist = await fetch(
+                `https://api.spotify.com/v1/artists/${artistId}/albums?limit=10`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                        "Authorization": `Bearer ${authToken}`
+                    }
+                }
+            )
+            const albums = await albumsOfArtist.json();
+            console.log(albums);
+            for(let i = 0; i < 5; i++) {
+                const randomIndex = Math.floor(Math.random() * albums.limit);
+                const album = albums.items[randomIndex];
+                const albumSize = Number(album.total_tracks);
+                const randomTrackIndex = Math.floor(Math.random() * albumSize);
+                const trackFromAlbum = await fetch(
+                    `https://api.spotify.com/v1/albums/${album.id}/tracks?limit=1&offset=${randomTrackIndex}`,
+                    {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                            "Authorization": `Bearer ${authToken}`
+                        }
+                    }
+                );
+                let track = await trackFromAlbum.json();
+                track.items[0].album = album;
+                console.log(track);
+                recommendationsRetrieved = [...recommendationsRetrieved, track.items[0]];
+            }
+            console.log(recommendationsRetrieved);
+            setRecommendations(recommendationsRetrieved);
         }
         if(authToken) getRecommendations();
     }, [authToken]);
 
     return (
-        <div className='top-container secondary'>
+        <div className='top-container'>
             <div className="top-items">
-                {recommendations && recommendations.items.map((track) => (
+                {recommendations && recommendations.map((track) => (
                     <div className='top-item'>
                         <img src={track.album.images[0].url} alt={track.name}/>
                         <p>
