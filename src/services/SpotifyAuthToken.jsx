@@ -69,16 +69,17 @@ const findAuthToken = async () => {
     const state = generateRandomString(32);
     localStorage.setItem("code_verifier", codeVerifier);
     localStorage.setItem("spotify_state", state);
-    const scope = "user-read-private user-read-email user-top-read";
+    const scope = "user-read-private user-read-email user-top-read playlist-read-private playlist-read-collaborative";
     const authUrl = new URL("https://accounts.spotify.com/authorize");
     const params = {
         response_type: "code",
         client_id: CLIENT_ID,
-        scope,
+        scope: scope,
         code_challenge_method: "S256",
         code_challenge: codeChallenge,
         redirect_uri: REDIRECT_URI,
-        state
+        state: state,
+        show_dialog: true
     };
     authUrl.search = new URLSearchParams(params).toString();
     window.location.href = authUrl.toString();

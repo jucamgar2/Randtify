@@ -20,7 +20,6 @@ const Recommendations = () => {
                 }
             );
             const artist = await topArtist.json();
-            console.log(artist);
             const artistId = artist.items[0].id;
             const albumsOfArtist = await fetch(
                 `https://api.spotify.com/v1/artists/${artistId}/albums?limit=10`,
@@ -33,7 +32,6 @@ const Recommendations = () => {
                 }
             )
             const albums = await albumsOfArtist.json();
-            console.log(albums);
             for(let i = 0; i < 5; i++) {
                 const randomIndex = Math.floor(Math.random() * albums.limit);
                 const album = albums.items[randomIndex];
@@ -51,10 +49,8 @@ const Recommendations = () => {
                 );
                 let track = await trackFromAlbum.json();
                 track.items[0].album = album;
-                console.log(track);
                 recommendationsRetrieved = [...recommendationsRetrieved, track.items[0]];
             }
-            console.log(recommendationsRetrieved);
             setRecommendations(recommendationsRetrieved);
         }
         if(authToken) getRecommendations();
