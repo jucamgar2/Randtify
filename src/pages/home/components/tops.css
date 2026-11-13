@@ -40,12 +40,6 @@
     padding-right: 16px;
 }
 
-@media screen and (max-width: 600px) {
-    .top-container {
-        width: 90vw;
-    }
-}
-
 .playlists-home-container {
     border-radius: 20px;
     width: 90vw;
@@ -75,9 +69,28 @@
     color: white;
 }
 
-.playlists-item img{
+.playlists-item img {
     width: 65px;
     height: 65px;
     border-radius: 5px;
     padding-right: 16px;
+}
+
+
+@media screen and (max-width: 600px) {
+    .top-container {
+        width: 90vw;
+    }
+
+    .playlists-items {
+        display: flex;
+        flex-direction: column;
+        padding: 1% 3%;
+        justify-content: space-between;
+    }
+
+    .home-blank-space {
+        height: 70px;
+    }
+
 }
