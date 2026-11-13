@@ -4,6 +4,7 @@ import TopArtists from "./components/TopArtists";
 import TopTracks from "./components/TopTracks";
 import './home.css';
 import Recommendations from "./components/Recommendations";
+import HomePlaylists from "./components/HomePlaylists";
 
 const Home = () => {
     const [authToken, setAuthToken] = useState("");
@@ -28,6 +29,12 @@ const Home = () => {
                     <Recommendations />
                 </div>
                 
+            </div>
+            <div>
+                <div>
+                    <h2>Tus playlists</h2>
+                    <HomePlaylists />
+                </div>
             </div>
             
         </div>

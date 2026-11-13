@@ -45,3 +45,39 @@
         width: 90vw;
     }
 }
+
+.playlists-home-container {
+    border-radius: 20px;
+    width: 90vw;
+    background-color: var(--color-third);
+}
+
+.playlists-items {
+    display: grid;
+    grid-template-columns: 27vw 27vw 27vw;
+    padding: 1% 3%;
+    justify-content: space-between;
+}
+
+.playlists-item {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: var(--color-primary);
+    font-weight: bold;
+    font-size: 1.15em;
+    max-height: 65px;
+}
+
+.playlists-item p {
+    margin-top: 0;
+    color: white;
+}
+
+.playlists-item img{
+    width: 65px;
+    height: 65px;
+    border-radius: 5px;
+    padding-right: 16px;
+}

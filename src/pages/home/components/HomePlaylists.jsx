@@ -5,7 +5,7 @@ const HomePlaylists = () => {
     const [playlists, setPlaylists] = useState([]);
 
     useEffect(() => {
-        getUserPlaylists = async () => {
+        const getUserPlaylists = async () => {
             const userPlaylists = await fetch(
                 'https://api.spotify.com/v1/me/playlists?limit=50',
                 {    
@@ -18,13 +18,27 @@ const HomePlaylists = () => {
             )
             const firstPlaylists = await userPlaylists.json();
             let items = firstPlaylists.items;
-            items.sort((a, b) => Number(a.items.total) - Number(b.items.total));
+            items.sort((a, b) => Number(b.items.total) - Number(a.items.total));
+            items = items.slice(0, 9);
             setPlaylists(items);
         }
         if(authToken) getUserPlaylists();
-    })
+    }, [authToken]);
 
-    return
+    return (
+        <div className="playlists-home-container">
+            <div className="playlists-items">
+                {playlists && playlists.map((playlist) => (
+                    <div className="playlists-item">
+                        <img src={playlist.images[0].url} alt={playlist.name}/>
+                        <p>
+                            {playlist.name}
+                        </p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
 }
 
 export default HomePlaylists;
