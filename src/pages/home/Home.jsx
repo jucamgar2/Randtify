@@ -1,5 +1,5 @@
 import { getAuthToken } from "../../services/SpotifyAuthToken";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import TopArtists from "./components/TopArtists";
 import TopTracks from "./components/TopTracks";
 import './home.css';
@@ -7,9 +7,8 @@ import Recommendations from "./components/Recommendations";
 import HomePlaylists from "./components/HomePlaylists";
 
 const Home = () => {
-    const [authToken, setAuthToken] = useState("");
     useEffect(() => {
-        setAuthToken(getAuthToken());
+        getAuthToken();
     }, [])
 
     return <div>
