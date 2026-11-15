@@ -37,6 +37,10 @@ const Home = () => {
                 </div>
             </div>
             
+            <div className="home-blank-space">
+
+            </div>
+            
         </div>
        
     </div>

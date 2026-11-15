@@ -43,7 +43,7 @@
 .playlists-home-container {
     border-radius: 20px;
     width: 90vw;
-    background-color: var(--color-third);
+    background-color: var(--color-secondary);
 }
 
 .playlists-items {
@@ -66,7 +66,6 @@
 
 .playlists-item p {
     margin-top: 0;
-    color: white;
 }
 
 .playlists-item img {
