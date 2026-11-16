@@ -4,10 +4,7 @@ import './SongReproductor.css'
 const SongReproductor = () => {
 
     return (
-        <div className="play-container">
-            <PlayCircleIcon className="play-icon"/>
-        </div>
-        
+        <PlayCircleIcon className="play-icon"/>
     );
 }
 

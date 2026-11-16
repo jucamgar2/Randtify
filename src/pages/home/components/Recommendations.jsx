@@ -61,12 +61,15 @@ const Recommendations = () => {
         <div className='top-container'>
             <div className="top-items">
                 {recommendations.length > 0 && recommendations.map((track) => (
-                    <div className='top-item'>
+                    <div className='top-item song'>
                         <img src={track.album.images[0].url} alt={track.name}/>
                         <p>
                             {track.name} - {track.artists.map(artist => artist.name).join(", ")}
                         </p>
-                        <SongReproductor />
+                        <div className="play-container">
+                            <SongReproductor className="play-btn"/>
+                        </div>
+                        
                     </div>
                 ))}
             </div>
