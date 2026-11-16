@@ -23,10 +23,12 @@
     font-weight: bold;
     font-size: 1.15em;
     max-height: 65px;
+    justify-content: space-between;
 }
 
 .top-item p {
     margin-top: 0;
+    width: 80%;
 }
 
 .top-item:not(:first-child) {

@@ -1,0 +1,10 @@
+.play-icon {
+    width: 30px;
+}
+
+.play-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+}
