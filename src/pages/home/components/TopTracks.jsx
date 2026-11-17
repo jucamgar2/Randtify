@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import './tops.css';
+import SongReproductor from '../../../components/SongReproductor';
+import { reproduceSong } from '../../../components/SongReproductor';
 
 const TopTracks = () => {
     const [topTracks, setTopTracks] = useState(undefined);
@@ -27,11 +29,14 @@ const TopTracks = () => {
         <div className='top-container secondary'>
             <div className="top-items">
                 {topTracks && topTracks.items.map((topTrack) => (
-                    <div className='top-item'>
+                    <div className='top-item song' onClick={() => {reproduceSong(topTrack.id)}}>
                         <img src={topTrack.album.images[0].url} alt={topTrack.name}/>
                         <p>
                             {topTrack.name} - {topTrack.artists.map(artist => artist.name).join(", ")}
                         </p>
+                        <div className="play-container">
+                            <SongReproductor className="play-btn"/>
+                        </div>
                     </div>
                 ))}
             </div>
