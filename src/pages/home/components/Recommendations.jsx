@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './tops.css';
-import SongReproductor from '../../../components/SongReproductor';
+import SongReproductor, { reproduceSong } from '../../../components/SongReproductor';
+
 
 const Recommendations = () => {
     const authToken = localStorage.getItem('access_token');
@@ -61,7 +62,7 @@ const Recommendations = () => {
         <div className='top-container'>
             <div className="top-items">
                 {recommendations.length > 0 && recommendations.map((track) => (
-                    <div className='top-item song'>
+                    <div key={track.id} className='top-item song' onClick={() => {reproduceSong(track.id)}}>
                         <img src={track.album.images[0].url} alt={track.name}/>
                         <p>
                             {track.name} - {track.artists.map(artist => artist.name).join(", ")}
