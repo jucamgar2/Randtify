@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import './tops.css';
+import SongReproductor, { reproduceSong } from '../../../components/SongReproductor';
+
 
 const Recommendations = () => {
     const authToken = localStorage.getItem('access_token');
-    const [recommendations, setRecommendations] = useState(undefined);
+    const [recommendations, setRecommendations] = useState([]);
 
     useEffect(() => {
         const getRecommendations = async () => {
@@ -59,12 +61,16 @@ const Recommendations = () => {
     return (
         <div className='top-container'>
             <div className="top-items">
-                {recommendations && recommendations.map((track) => (
-                    <div className='top-item'>
+                {recommendations.length > 0 && recommendations.map((track) => (
+                    <div key={track.id} className='top-item song' onClick={() => {reproduceSong(track.id)}}>
                         <img src={track.album.images[0].url} alt={track.name}/>
                         <p>
                             {track.name} - {track.artists.map(artist => artist.name).join(", ")}
                         </p>
+                        <div className="play-container">
+                            <SongReproductor className="play-btn"/>
+                        </div>
+                        
                     </div>
                 ))}
             </div>
