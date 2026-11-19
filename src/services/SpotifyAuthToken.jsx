@@ -69,7 +69,7 @@ const findAuthToken = async () => {
     const state = generateRandomString(32);
     localStorage.setItem("code_verifier", codeVerifier);
     localStorage.setItem("spotify_state", state);
-    const scope = "user-read-private user-read-email user-top-read playlist-read-private playlist-read-collaborative";
+    const scope = "user-read-private user-read-email user-top-read playlist-read-private playlist-read-collaborative user-modify-playback-state user-read-playback-state";
     const authUrl = new URL("https://accounts.spotify.com/authorize");
     const params = {
         response_type: "code",
