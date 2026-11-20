@@ -25,11 +25,61 @@ const HomePlaylists = () => {
         if(authToken) getUserPlaylists();
     }, [authToken]);
 
+    const randomReproduction = async (id) => {
+        let tracks = [];
+        let next = `https://api.spotify.com/v1/playlists/${id}/items?limit=50`;
+        while(next != null) {
+            const plalylistItems = await fetch(
+                next,
+                {    
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                        "Authorization": `Bearer ${authToken}`
+                    }
+                }
+            );
+            const items = await plalylistItems.json();
+            tracks.push(...items.items
+                    .map(element => element.item)
+                    .filter(item => item !== null)
+            );
+            next = items.next;
+        }
+        let maxSize = Math.min(50, tracks.length);
+        const body = []
+        while(maxSize > 0 ) {
+            const random = Math.floor(Math.random() * tracks.length);
+            if(tracks[random].id){
+                body.push(`spotify:track:${tracks[random].id}`);
+                tracks.splice(random, 1);
+                maxSize--;
+            }
+            
+        }
+        const response = await fetch(
+            "https://api.spotify.com/v1/me/player/play",
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${authToken}`,
+                },
+                body: JSON.stringify({
+                    uris: body
+                })
+            },
+        );
+        if(!response.ok){
+            console.error(response.status);
+        }
+    }
+
     return (
         <div className="playlists-home-container">
             <div className="playlists-items">
-                {playlists && playlists.map((playlist) => (
-                    <div className="playlists-item">
+                {playlists.length > 0 && playlists.map((playlist) => (
+                    <div className="playlists-item" onClick={() => {randomReproduction(playlist.id)}}>
                         <img src={playlist.images[0].url} alt={playlist.name}/>
                         <p>
                             {playlist.name}
