@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { PlayIcon } from "@heroicons/react/16/solid";
 
 const HomePlaylists = () => {
     const authToken = localStorage.getItem('access_token');
@@ -84,6 +85,9 @@ const HomePlaylists = () => {
                         <p>
                             {playlist.name}
                         </p>
+                        <div className="play-container">
+                            <PlayIcon className="play-icon-btn"/>
+                        </div>
                     </div>
                 ))}
             </div>
