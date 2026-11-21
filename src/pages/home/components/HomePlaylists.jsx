@@ -80,13 +80,13 @@ const HomePlaylists = () => {
         <div className="playlists-home-container">
             <div className="playlists-items">
                 {playlists.length > 0 && playlists.map((playlist) => (
-                    <div className="playlists-item" onClick={() => {randomReproduction(playlist.id)}}>
+                    <div className="playlists-item">
                         <img src={playlist.images[0].url} alt={playlist.name}/>
                         <p>
                             {playlist.name}
                         </p>
-                        <div className="play-container">
-                            <PlayIcon className="play-icon-btn"/>
+                        <div className="play-container" onClick={() => {randomReproduction(playlist.id)}}>
+                            <PlayIcon className="play-icon-btn" />
                         </div>
                     </div>
                 ))}
