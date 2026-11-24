@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './navbar.css';
 import { HomeIcon, PlayCircleIcon, ListBulletIcon } from '@heroicons/react/16/solid';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
 
@@ -31,20 +32,25 @@ const Navbar = () => {
 
     return (
         <div className="nav-bar">
-            <div className='icon-container'>
-                <HomeIcon className='icon'/>
-                <p>Inicio</p>
-            </div>
+            <Link to={{pathname:"/"}}>
+                <div className='icon-container'>
+                    <HomeIcon className='icon'/>
+                    <p>Inicio</p>
+                
+                </div>
+            </Link>
             
             <div className='icon-container'>
                 <PlayCircleIcon className='icon' />
                 <p>Reproducción</p>
             </div>
             
-            <div className='icon-container'>
-                <ListBulletIcon className="icon" />
-                <p>Playlists</p>
-            </div>
+            <Link to={{pathname:"/playlists"}}>
+                <div className='icon-container'>
+                    <ListBulletIcon className="icon" />
+                    <p>Playlists</p>
+                </div>
+            </Link>
 
             <div className='icon-container' onClick={() =>window.open(spotifyUrl)}>
                 <img src={userImage} alt={userName} className='icon'/>
