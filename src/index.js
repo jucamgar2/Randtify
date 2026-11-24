@@ -6,6 +6,7 @@ import Home from './pages/home/Home';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import SpotifyCallback from './services/SpotifyCallback';
 import LayoutWithNavbar from './layouts/LayoutWithNavbar';
+import Playlists from './pages/playlists/Playlists';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,6 +16,7 @@ root.render(
         <Route element={<LayoutWithNavbar/>}>
           <Route path="/" element={<Home />} />
           <Route path="/callback" element={<SpotifyCallback />} />
+          <Route path="/playlists" element={<Playlists/>} />
         </Route>
       </Routes>
     </BrowserRouter>
