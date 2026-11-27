@@ -3,12 +3,32 @@ import { PlayIcon } from "@heroicons/react/16/solid";
 
 
 const Playlists = () => {
-
+    const authToken = localStorage.getItem('access_token');
     const [playlists, setPlaylists] = useState([]);
 
     useEffect(() => {
-
-    });
+        const getAllUserPlaylists = async () => {
+            const userPlaylists = [];
+            let next = 'https://api.spotify.com/v1/me/playlists?limit=50';
+            while(next != null) {
+                const playlists = await fetch(
+                    next,
+                    {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                            "Authorization": `Bearer ${authToken}`
+                        }
+                    }
+                );
+                const items = await playlists.json();
+                userPlaylists.push(...items.items);
+                next = items.next;
+            }
+            setPlaylists(userPlaylists);
+        }
+        if(authToken) getAllUserPlaylists();
+    }, [authToken]);
     
     return <div>
         <h1>Tus playlists</h1>
@@ -16,9 +36,9 @@ const Playlists = () => {
             {playlists.length == 0 && <h1>Cargando...</h1>}
             {playlists.length > 0 && playlists.map((playlist) => (
                 <div>
-                    <img src={playlist} alt={playlist}/>
+                    <img src={playlist.images[0].url} alt={playlist.name}/>
                     <p>
-                        {playlist}
+                        {playlist.name}
                     </p>
                     <div className="play-container">
                         <PlayIcon className="play-icon-btn" />
